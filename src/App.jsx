@@ -6,6 +6,7 @@ import LandingPage from "./pages/LandingPage";
 import Dashboard from "./pages/Home/Dashboard";
 import InterviewPrep from "./pages/InterviewPrep/InterviewPrep";
 import UserProvider from './context/userContext';
+import QuizPage from './pages/Home/QuizPage';
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
 
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/interview-prep/:sessionId" element={<InterviewPrep />} />
+          <Route path="/quizpage" element={<QuizPage />} />
 
         </Routes>
       </Router>

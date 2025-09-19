@@ -30,7 +30,6 @@ const LandingPage = () => {
   return (
 
     <>
-
       <div className='w-full min-h-full bg-[#F7CFD8]'>
         <div className='w-[500px] h-[500px] bg-[#A53860] blur-[300px] absolute top-0 left-0'/>
 
@@ -75,9 +74,15 @@ const LandingPage = () => {
                 here.
               </p>
 
-              <button className='bg-black text-sm font-semibold text-white px-7 py-2.5 rounded-full hover:bg-[#FFEEF4] hover:text-black border border-[#F7CFD8] hover:border-[#670D2F] transition-colors cursor-pointer' onClick={handleCTA}>
+              <button className='bg-black text-sm font-semibold text-white px-7 py-2.5 rounded-full hover:bg-[#FFEEF4] hover:text-black border border-[#F7CFD8] hover:border-[#670D2F] transition-colors cursor-pointer ' onClick={handleCTA}>
                 Get Started
               </button>
+               <div className='mt-5 '>
+              <button className='bg-green-500 text-sm font-semibold text-white px-7 py-2.5 rounded-full hover:bg-[#0ae118]    hover:border-[#670D2F] transition-colors cursor-pointer' onClick={navigate("/quizpage")}>
+                Generate quiz
+              </button>
+
+               </div>
 
             </div>
           </div>
