@@ -26,9 +26,12 @@ const LandingPage = () => {
 
   return (
     <>
+      {/* Main Wrapper */}
       <div className="w-full min-h-screen bg-[#F7CFD8] overflow-hidden relative">
+        {/* Blurred Circle */}
         <div className="w-[500px] h-[500px] bg-[#A53860] blur-[300px] absolute top-0 left-0" />
 
+        {/* Header + Hero Section */}
         <div className="max-w-7xl mx-auto px-4 pt-6 pb-32 relative z-10">
           {/* Header */}
           <header className="flex justify-between items-center mb-16">
@@ -47,7 +50,7 @@ const LandingPage = () => {
             )}
           </header>
 
-          {/* Hero */}
+          {/* Hero Text + CTA */}
           <div className="flex flex-col md:flex-row items-center gap-8 text-center md:text-left">
             <div className="w-full md:w-1/2">
               <div className="flex justify-center md:justify-start mb-2">
@@ -83,21 +86,20 @@ const LandingPage = () => {
         </div>
       </div>
 
-      {/* Hero Image */}
-     <section className="w-full bg-[#F7CFD8] py-10 flex items-center justify-center -mt-24 z-10 relative">
-  <div className="w-full max-w-6xl px-4">
-    <div className="bg-[#F7CFD8] rounded-lg overflow-hidden">
-      <img
-        src={HERO}
-        alt="Hero showcasing interview AI"
-        className="w-full h-auto rounded-lg object-cover"
-      />
-    </div>
-  </div>
-</section>
+      {/* Hero Image Section with Pink Background */}
+      <section className="w-full bg-[#F7CFD8] py-10 flex items-center justify-center -mt-24 z-10 relative">
+        <div className="w-full max-w-6xl px-4">
+          <div className="bg-[#F7CFD8] rounded-lg overflow-hidden">
+            <img
+              src={HERO}
+              alt="Hero showcasing interview AI"
+              className="w-full h-auto rounded-lg object-cover"
+            />
+          </div>
+        </div>
+      </section>
 
-
-      {/* Features */}
+      {/* Features Section */}
       <section className="w-full bg-[#F7CFD8] mt-10 z-10 relative">
         <div className="max-w-7xl mx-auto px-4 pt-10 pb-20">
           <h2 className="text-2xl font-medium text-center mb-12">
@@ -105,7 +107,7 @@ const LandingPage = () => {
           </h2>
 
           <div className="flex flex-col items-center gap-8">
-            {/* First 3 Cards */}
+            {/* First 3 Feature Cards */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 w-full">
               {APP_FEATURES.slice(0, 3).map((feature) => (
                 <div
@@ -120,7 +122,7 @@ const LandingPage = () => {
               ))}
             </div>
 
-            {/* Last 2 Cards */}
+            {/* Last 2 Feature Cards */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 w-full">
               {APP_FEATURES.slice(3).map((feature) => (
                 <div
@@ -139,11 +141,11 @@ const LandingPage = () => {
       </section>
 
       {/* Footer */}
-      <footer className="text-sm bg-gray-50 text-secondary text-center p-5 mt-5">
+      <footer className="text-sm bg-gray-50 text-[#670D2F] text-center p-5 mt-5">
         Made with ❤️ by Shobhit Sharma
       </footer>
 
-      {/* Auth Modal */}
+      {/* Login / SignUp Modal */}
       <Modal
         isOpen={openAuthModal}
         onClose={() => {
