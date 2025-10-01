@@ -84,13 +84,18 @@ const LandingPage = () => {
       </div>
 
       {/* Hero Image */}
-      <section className="flex items-center justify-center -mt-24 px-4 z-10 relative">
-        <img
-          src={HERO}
-          alt="Hero showcasing interview AI"
-          className="w-full max-w-6xl rounded-lg"
-        />
-      </section>
+     <section className="w-full bg-[#F7CFD8] py-10 flex items-center justify-center -mt-24 z-10 relative">
+  <div className="w-full max-w-6xl px-4">
+    <div className="bg-[#F7CFD8] rounded-lg overflow-hidden">
+      <img
+        src={HERO}
+        alt="Hero showcasing interview AI"
+        className="w-full h-auto rounded-lg object-cover"
+      />
+    </div>
+  </div>
+</section>
+
 
       {/* Features */}
       <section className="w-full bg-[#F7CFD8] mt-10 z-10 relative">
