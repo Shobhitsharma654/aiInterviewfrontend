@@ -100,7 +100,7 @@ const LandingPage = () => {
       </section>
 
       {/* Features Section */}
-      <section className="w-full bg-yellow-100 mt-10 z-10 relative">
+      <section className="w-full bg-yellow-100 mt-0 z-10 relative">
         <div className="max-w-7xl mx-auto px-4 pt-10 pb-20">
           <h2 className="text-2xl font-medium text-center text-yellow-900 mb-12">
             Features That Make You Shine
