@@ -87,7 +87,7 @@ const LandingPage = () => {
       </div>
 
       {/* Hero Image Section */}
-      <section className="w-full bg-yellow-100 py-10 flex items-center justify-center -mt-24 z-10 relative">
+      <section className="w-full shadow-xs bg-yellow-50 py-10 flex items-center justify-center -mt-24 z-10 relative">
         <div className="w-full max-w-6xl px-4">
           <div className="bg-yellow-100 rounded-lg overflow-hidden">
             <img
@@ -141,7 +141,7 @@ const LandingPage = () => {
       </section>
 
       {/* Footer */}
-      <footer className="text-sm bg-yellow-50 text-yellow-800 text-center p-5 mt-5">
+      <footer className="text-sm  text-center p-5 mt-5">
         Made with ❤️ by Shobhit Sharma
       </footer>
 
