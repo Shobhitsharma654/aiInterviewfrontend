@@ -78,9 +78,7 @@ const LandingPage = () => {
                 Get Started
               </button>
                <div className='mt-5 '>
-              <button className='bg-green-500 text-sm font-semibold text-white px-7 py-2.5 rounded-full hover:bg-[#0ae118]    hover:border-[#670D2F] transition-colors cursor-pointer' onClick={navigate("/quizpage")}>
-                Generate quiz
-              </button>
+
 
                </div>
 

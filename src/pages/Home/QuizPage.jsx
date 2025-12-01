@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import axios from "axios";
 import axiosInstance from "../../utils/axiosInstance";
 import { API_PATHS } from "../../utils/apiPaths";
 
@@ -11,48 +10,57 @@ const QuizPage = () => {
   const [results, setResults] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  // Generate quiz
+ // Generate quiz
   const generateQuiz = async () => {
+    if (!topic.trim()) {
+      alert("Please enter a topic");
+      return;
+    }
+
     setLoading(true);
     try {
-      const res = await axiosInstance.post(API_PATHS.QUIZ.GENERATE_QUIZ, {
-        topic,
-        numberOfQuestions,
-      });
-      console.log(res.data);
-      setQuiz(res.data.quiz);
+      const res = await axiosInstance.post(
+        API_PATHS.QUIZ.GENERATE_QUIZ,
+        { topic, numberOfQuestions }
+      );
+
+      console.log("Generated quiz:", res.data);
+      setQuiz(res.data.quiz); // backend sends { success, quiz }
       setResults(null);
       setUserAnswers({});
     } catch (err) {
-      console.error(err);
+      console.log(err.message);
+      console.error("Quiz generation error:", err);
       alert("Error generating quiz");
     }
     setLoading(false);
   };
 
-  // Handle answer selection
-  const handleSelect = (questionIndex, option) => {
-    setUserAnswers((prev) => ({ ...prev, [questionIndex]: option }));
+  // Select answer
+  const handleSelect = (qIdx, option) => {
+    setUserAnswers((prev) => ({ ...prev, [qIdx]: option }));
   };
 
-  // Submit quiz
-  const submitQuiz = async () => {
+  // Submit quiz (evaluate locally)
+  const submitQuiz = () => {
     if (quiz.length === 0) return;
-    setLoading(true);
-    try {
-      const res = await axios.post("/api/quiz/submit", {
-        quiz,
-        userAnswers: quiz.map((q, idx) => ({
-          question: q.question,
-          selectedOption: userAnswers[idx] || "",
-        })),
-      });
-      setResults(res.data);
-    } catch (err) {
-      console.error(err);
-      alert("Error submitting quiz");
-    }
-    setLoading(false);
+
+    const evaluated = quiz.map((q, idx) => {
+      const userAnswer = userAnswers[idx] || "";
+      const isCorrect = userAnswer === q.answer;
+      return {
+        question: q.question,
+        correctAnswer: q.answer,
+        userAnswer,
+        isCorrect,
+      };
+    });
+
+    setResults({
+      score: evaluated.filter((r) => r.isCorrect).length,
+      total: quiz.length,
+      results: evaluated,
+    });
   };
 
   return (
@@ -60,30 +68,31 @@ const QuizPage = () => {
       <h1 className="text-2xl font-bold mb-4">AI Quiz Generator</h1>
 
       {/* Quiz Settings */}
-      <div className="mb-4">
+      <div className="mb-4 flex gap-2">
         <input
           type="text"
           placeholder="Enter Topic"
           value={topic}
           onChange={(e) => setTopic(e.target.value)}
-          className="border p-2 mr-2"
+          className="border p-2 flex-1"
         />
         <input
           type="number"
           min={1}
           value={numberOfQuestions}
-          onChange={(e) => setNumberOfQuestions(e.target.value)}
-          className="border p-2 mr-2 w-20"
+          onChange={(e) => setNumberOfQuestions(Number(e.target.value))}
+          className="border p-2 w-20"
         />
         <button
           onClick={generateQuiz}
           className="bg-blue-600 text-white px-4 py-2 rounded"
+          disabled={loading}
         >
-          Generate Quiz
+          {loading ? "Generating..." : "Generate Quiz"}
         </button>
       </div>
 
-      {loading && <p>Loading...</p>}
+      {loading && <p>Loading quiz...</p>}
 
       {/* Quiz Questions */}
       {quiz.length > 0 && !results && (
@@ -117,7 +126,7 @@ const QuizPage = () => {
         </div>
       )}
 
-      {/* Quiz Results */}
+      {/* Results */}
       {results && (
         <div className="mt-6 p-4 border rounded">
           <h2 className="text-xl font-bold mb-2">
@@ -128,19 +137,22 @@ const QuizPage = () => {
               <p>
                 <strong>{idx + 1}. {r.question}</strong>
               </p>
-              <p>Your answer: {r.userAnswer}</p>
+              <p>Your answer: {r.userAnswer || "Not answered"}</p>
               <p>Correct answer: {r.correctAnswer}</p>
               <p>
                 {r.isCorrect ? (
-                  <span className="text-green-600">Correct</span>
+                  <span className="text-green-600">✅ Correct</span>
                 ) : (
-                  <span className="text-red-600">Incorrect</span>
+                  <span className="text-red-600">❌ Incorrect</span>
                 )}
               </p>
             </div>
           ))}
           <button
-            onClick={() => { setResults(null); setQuiz([]); }}
+            onClick={() => {
+              setResults(null);
+              setQuiz([]);
+            }}
             className="mt-4 bg-blue-600 text-white px-4 py-2 rounded"
           >
             Try Another Quiz
