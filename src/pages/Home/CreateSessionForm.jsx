@@ -122,12 +122,14 @@ const CreateSessionForm = () => {
         {error && <p className='text-red-500 text-xs pb-2.5'>{error}</p>}
 
         <button
-            type='submit'
-            className='btn-primary w-full mt-2'
-            disabled={isLoading}
-        >
-        {isLoading && <SpinnerLoader/>}Create Session
-        </button>
+  type="submit"
+  className="btn-primary w-full mt-2"
+  disabled={isLoading}
+>
+  Create Session
+</button>
+
+{isLoading && <SpinnerLoader className="mx-auto mt-2" />}
 
     </form>
   </div>
